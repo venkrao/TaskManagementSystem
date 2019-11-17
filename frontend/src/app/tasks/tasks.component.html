@@ -1,0 +1,40 @@
+<div *ngIf="inprogress">
+    Loading listings.. Please wait.
+  </div>
+  
+  <div class="container">
+    <div *ngIf="tasksAvailable">
+      <h4>Tasks. (Total: {{total}})</h4>
+      <div *ngFor="let task of allTasks">
+        <div class="task-item-continer" id="task_{{task.id}}">
+            <div>
+                <a class=".link-spanner" href="/tasks/{{task.id}}">{{ task.title }}</a> &nbsp; &nbsp;
+                <a style="text-align: right; width: 50%" href="#" id="delete_task"
+                (click)="deleteTask(task.id)">Delete task</a>&nbsp;
+                <a style="text-align: right; width: 50%" href="#" id="update_task"
+                (click)="updateTask(task.id)">Update task</a>&nbsp;
+                <a style="text-align: right; width: 50%" href="#" id="postpone_task"
+                (click)="postponeTask(task.id)">Postpone task</a>&nbsp;
+
+            </div>
+            <div>Description: {{ task.description }}</div>
+            <div>Due date: {{task.dueDate}} </div>
+            <div>Priority: {{ task.priority }}</div>
+            <div>Resolved At: {{task.resolvedAt}} </div>
+            <div>Updated At: {{task.updatedAt}} </div>
+
+            <div *ngIf="task.remindMeDate">
+                Reminder for: {{task.remindMeDate}}
+            </div>
+            <hr>
+        </div>
+        
+      </div>
+      </div>
+  
+  </div>
+  
+  <div *ngIf="!tasksAvailable && !inprogress">
+    No tasks available. <a href="http://localhost:4200/tasks/create">Create one</a> now.
+  </div>
+  
