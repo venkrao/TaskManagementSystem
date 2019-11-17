@@ -1,9 +1,11 @@
 FROM ubuntu:18.04 as base
 
-RUN apt install python3-pip \
-curl gnupg -y \
-curl gnupg -y
+RUN echo deb http://archive.ubuntu.com/ubuntu bionic main universe >> /etc/apt/sources.list
+RUN echo deb http://archive.ubuntu.com/ubuntu bionic-security main universe >> /etc/apt/sources.list
+RUN echo deb http://archive.ubuntu.com/ubuntu bionic-updates main universe >> /etc/apt/sources.list
 
+RUN apt update
+RUN apt install python3-pip
 ## Install RabbitMQ signing key
 RUN curl -fsSL https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc | sudo apt-key add -
 
@@ -13,7 +15,6 @@ RUN apt-get install apt-transport-https
 ## Add Bintray repositories that provision latest RabbitMQ and Erlang 21.x releases
 RUN echo deb https://dl.bintray.com/rabbitmq-erlang/debian bionic erlang >> /etc/apt/sources.list.d/bintray.rabbitmq.list
 RUN echo deb https://dl.bintray.com/rabbitmq/debian bionic main >> /etc/apt/sources.list.d/bintray.rabbitmq.list
-
 
 ## Update package indices
 RUN apt-get update -y
