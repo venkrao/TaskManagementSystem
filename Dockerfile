@@ -5,7 +5,8 @@ RUN echo deb http://archive.ubuntu.com/ubuntu bionic-security main universe >> /
 RUN echo deb http://archive.ubuntu.com/ubuntu bionic-updates main universe >> /etc/apt/sources.list
 
 RUN apt update
-RUN apt install python3-pip
+RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+
 ## Install RabbitMQ signing key
 RUN curl -fsSL https://github.com/rabbitmq/signing-keys/releases/download/2.0/rabbitmq-release-signing-key.asc | sudo apt-key add -
 
