@@ -5,7 +5,7 @@ RUN echo deb http://archive.ubuntu.com/ubuntu bionic-security main universe >> /
 RUN echo deb http://archive.ubuntu.com/ubuntu bionic-updates main universe >> /etc/apt/sources.list
 
 RUN apt update
-RUN  ap install curl
+RUN  apt install curl
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 
 ## Install RabbitMQ signing key
